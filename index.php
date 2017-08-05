@@ -1,32 +1,38 @@
 <?php
-include ('libs/CookieClass.php');
-include ('libs/SessionClass.php');
+include ('libs/config.php');
+include ('libs/function.php');
+//COOKIE
 $coo = new CookieClass();
-$coo->saveData('test1', 'test2');
-echo $coo->getData('test1');
-
-
-echo "1. Work with Session!";
-echo "<br />Send key = varSess and  val = HelloUser6 <br /> ";
-
-$session = new SessionClass();
-
-
-$session->saveData('varSess', 'HelloUser6');
-
-echo "Get Data: ";
-echo $session->getData('varSess');
-
-//echo $_SESSION['varSess'];
-
-echo "<br /> Delete session data, get Data again: ";
-$session->deleteData('varSess');
-if (!$session->getData('varSess'))
+$coo->saveData(KEY, VAL);
+$getCoo = $coo->getData(KEY);
+$coo->deleteData(KEY);
+//SESSION
+$sess=new SessionClass();
+$sess->saveData(KEY, VAL);
+$getSess = $sess->getData(KEY);
+$sess->deleteData(KEY);
+//PGSQL
+try{
+    $pg = new PostgreSQLClass();
+    $pg->saveData(KEY, VAL);
+    $getPg = $pg->getData(KEY);
+    $pg->deleteData(KEY);
+    $getPgDel = $pg->getData(KEY);
+}catch (Exception $e)
 {
-	echo "FALSE";
+    $msg = $e->getMessage();
 }
-
-
-//$coo = new CookieClass();
-//$coo->saveData('test1', 'test2');
-//echo $coo->getData('test1');
+//MySQL
+try{
+    $my = new MySQLClass();
+    $my->saveData(KEY,VAL);
+    $getMy = $my->getData(KEY);
+    $my->deleteData(KEY);
+    $getMyDel = $my->getData(KEY);
+}catch(Exception $e)
+{
+    $msg = $e->getMessage();
+}
+//Template include
+include('template/tmp.php')
+?>

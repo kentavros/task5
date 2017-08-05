@@ -1,13 +1,24 @@
 <?php
-require_once('iWorkData.php');
 class CookieClass implements iWorkData
 {
-	public function saveData($key, $val)
+    /**
+     * Set cookie
+     * @param $key
+     * @param $val
+     * @return mixed
+     */
+    public function saveData($key, $val)
 	{
 		setcookie($key, $val, time()+3600);
-		$_COOKIE[$key] = $val; 
+		$_COOKIE[$key] = $val;
+		return true;
 	}
 
+    /**
+     * Get cookie
+     * @param $key
+     * @return string
+     */
 	public function getData($key)
 	{
 		if (isset($_COOKIE[$key]))
@@ -16,14 +27,26 @@ class CookieClass implements iWorkData
 		}
 		else
 		{
-			return false;
+			return NO_COOKIE;
 		}
-
-		 
 	}
 
+    /**
+     * Delete Cookie
+     * @param $key
+     * @return string
+     */
 	public function deleteData($key)
 	{
-		
+        if (isset($_COOKIE[$key]))
+        {
+            unset($_COOKIE[$key]);
+            return DEL_COOKIE;
+        }
+        else
+        {
+            return NO_COOKIE;
+        }
 	}
 }
+?>

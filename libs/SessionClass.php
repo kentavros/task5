@@ -1,16 +1,24 @@
-<?php 
-require_once('iWorkData.php');
+<?php
 class SessionClass implements iWorkData
 {
 
-
-
+    /**
+	 * Save Data to session
+     * @param $key
+     * @param $val
+     * @return bool
+     */
 	public function saveData($key, $val)
 	{
-		$_SESSION[$key] = $val; 
-
+		$_SESSION[$key] = $val;
+		return true;
 	}
 
+    /**
+	 * Get Data from Session
+     * @param $key
+     * @return bool
+     */
 	public function getData($key)
 	{
 		if (isset($_SESSION[$key]))
@@ -23,6 +31,11 @@ class SessionClass implements iWorkData
 		}
 	}
 
+    /**
+	 * Delete data from Session
+     * @param $key
+     * @return bool
+     */
 	public function deleteData($key)
 	{
 		if (isset($_SESSION[$key]))
@@ -34,15 +47,6 @@ class SessionClass implements iWorkData
 		{
 			return false;
 		}
-
-	
 	}
-
-
-	
-		
 }
-
-
-
 ?>
