@@ -36,8 +36,8 @@ class PostgreSQLClass implements iWorkData
             }
         }
         //Value is empty - add value
-//        $query = "INSERT INTO ".PG_TB_NAME." (key, data) VALUES ('".$key."','".$val."')";   //for class DB
-        $query = "INSERT INTO "."\"".PG_TB_NAME."\" (key, data) VALUES ('".$key."','".$val."')"; //for work DB
+        $query = "INSERT INTO ".PG_TB_NAME." (key, data) VALUES ('".$key."','".$val."')";   //for class DB
+//        $query = "INSERT INTO "."\"".PG_TB_NAME."\" (key, data) VALUES ('".$key."','".$val."')"; //for work DB
         $result = pg_query($this->connectPgProp, $query);
         if (!$result)
         {
@@ -58,8 +58,8 @@ class PostgreSQLClass implements iWorkData
     public function getData ($key)
     {
 
-//        $query = "SELECT key, data FROM ".PG_TB_NAME." WHERE key='".$key."'"; //for class BD
-        $query = "SELECT key, data FROM \"".PG_TB_NAME."\" WHERE key='".$key."'"; //for work BD
+        $query = "SELECT key, data FROM ".PG_TB_NAME." WHERE key='".$key."'"; //for class BD
+      //  $query = "SELECT key, data FROM \"".PG_TB_NAME."\" WHERE key='".$key."'"; //for work BD
         $result = pg_query($this->connectPgProp, $query);
         if (!$result)
         {
@@ -84,8 +84,8 @@ class PostgreSQLClass implements iWorkData
      */
     public function deleteData($key)
     {
-        //$query = "DELETE FROM ".PG_TB_NAME." WHERE key='".$key."'";
-        $query = "DELETE FROM \"".PG_TB_NAME."\" WHERE key='".$key."'";
+        $query = "DELETE FROM ".PG_TB_NAME." WHERE key='".$key."'";
+    //    $query = "DELETE FROM \"".PG_TB_NAME."\" WHERE key='".$key."'";
         $result = pg_query($this->connectPgProp, $query);
         if (!$result)
         {
